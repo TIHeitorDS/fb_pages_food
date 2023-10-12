@@ -5,15 +5,15 @@ int main()
     Grafo **matrizadj = cria_matriz();
     matrizadj = preenche_matriz(matrizadj);
     matrizadj = verifica_conexoes(matrizadj);
-    printConexoes(matrizadj);
     char opc;
     do
     {
         menu();
-        opc = le_opcao(OPCAO0,OPCAO8);
+        opc = le_opcao(OPCAO0, OPCAO8);
         switch (opc)
         {
         case OPCAO1:
+            verifica_conexao_entre_paginas(matrizadj);
             break;
         case OPCAO2:
             break;

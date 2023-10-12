@@ -142,3 +142,45 @@ void printConexoes(Grafo **matriz)
     }
     free(aux);
 }
+
+#include <stdio.h>
+
+int verifica_conexao_entre_paginas(Grafo **matriz)
+{
+    int id_pagina1, id_pagina2;
+    print_yellow("Informe o ID da primeira página: ");
+    if (scanf("%d", &id_pagina1) != 1)
+    {
+        print_red("Entrada inválida. Certifique-se de que você digitou um número para o ID da primeira página.\n");
+        return -1;
+    }
+    print_yellow("Informe o ID da segunda página: ");
+    if (scanf("%d", &id_pagina2) != 1)
+    {
+        print_red("Entrada inválida. Certifique-se de que você digitou um número para o ID da segunda página.\n");
+        return -1;
+    }
+
+    for (int i = 0; i < TAMANHO_MATRIZ; i++)
+    {
+        for (int j = 0; j < TAMANHO_MATRIZ; j++)
+        {
+            if ((matriz[i][j].aresta1.id == id_pagina1 && matriz[i][j].aresta2.id == id_pagina2) ||
+                (matriz[i][j].aresta1.id == id_pagina2 && matriz[i][j].aresta2.id == id_pagina1))
+            {
+                if (matriz[i][j].conexao == 1)
+                {
+                    printf("Há uma conexão entre as páginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+                    return 1;
+                }
+                else
+                {
+                    printf("Não há conexão entre as páginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+                    return 0;
+                }
+            }
+        }
+    }
+    printf("Não há conexão entre as páginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+    return 0;
+}
