@@ -149,13 +149,16 @@ int verifica_conexao_entre_paginas(Grafo **matriz)
     print_yellow("Informe o ID da primeira página: ");
     if (scanf("%d", &id_pagina1) != 1)
     {
-        print_red("Entrada inválida. Certifique-se de que você digitou um número para o ID da primeira página.\n");
+        limpa_buffer();
+        print_red("Entrada invalida. Certifique-se de que voce digitou um numero para o ID da pagina.\n");
         return -1;
     }
     print_yellow("Informe o ID da segunda página: ");
     if (scanf("%d", &id_pagina2) != 1)
     {
-        print_red("Entrada inválida. Certifique-se de que você digitou um número para o ID da segunda página.\n");
+        limpa_buffer();
+
+        print_red("Entrada invalida. Certifique-se de que voce digitou um numero para o ID da pagina.\n");
         return -1;
     }
     char *aux = (char *)malloc(100 * sizeof(char));
@@ -192,4 +195,67 @@ int verifica_conexao_entre_paginas(Grafo **matriz)
     print_red(aux);
     free(aux);
     return 0;
+}
+
+void buscar_pagina_por_id(Grafo **matriz)
+{
+    int id_pagina;
+    print_yellow("Informe o ID da pagina que deseja buscar: ");
+
+    if (scanf("%d", &id_pagina) != 1)
+    {
+        limpa_buffer();
+        print_red("Entrada invalida. Certifique-se de que voce digitou um numero para o ID da pagina.\n");
+        return;
+    }
+
+    int encontrou = 0;
+    char *aux = (char *)malloc(100 * sizeof(char));
+    if (aux == NULL)
+    {
+        print_red("Erro de alocacao de memoria\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < TAMANHO_MATRIZ; i++)
+    {
+        if (matriz[i][0].aresta1.id == id_pagina)
+        {
+            sprintf(aux, "Pagina encontrada com ID %d: %s\n", id_pagina, matriz[i][0].aresta1.nome);
+            print_green(aux);
+            encontrou = 1;
+        }
+    }
+
+    if (!encontrou)
+    {
+        sprintf(aux, "Nenhuma pagina encontrada com o ID %d.\n", id_pagina);
+        print_red(aux);
+    }
+
+    free(aux);
+}
+
+void exibe_quantidade_de_vertices(Grafo **matriz)
+{
+    int quantidade_vertices = 0;
+
+    for (int i = 0; i < TAMANHO_MATRIZ; i++)
+    {
+        if (matriz[i][0].aresta1.id >= 0) 
+        {
+            quantidade_vertices++;
+        }
+    }
+
+    char *aux = (char *)malloc(100 * sizeof(char));
+    if (aux == NULL)
+    {
+        print_red("Erro de alocação de memória\n");
+        exit(1);
+    }
+
+    sprintf(aux, "A quantidade de vertices (paginas) na matriz e: %d\n", quantidade_vertices);
+    print_green(aux);
+    free(aux);
 }

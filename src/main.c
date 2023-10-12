@@ -16,8 +16,10 @@ int main()
             verifica_conexao_entre_paginas(matrizadj);
             break;
         case OPCAO2:
+            buscar_pagina_por_id(matrizadj);
             break;
         case OPCAO3:
+            exibe_quantidade_de_vertices(matrizadj);
             break;
         case OPCAO4:
             break;
