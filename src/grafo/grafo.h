@@ -8,4 +8,4 @@ Grafo **cria_matriz();
 
 Grafo **preenche_matriz(Grafo **matriz);
 
-void printConexoes(Grafo **matriz);
+void print_conexoes(Grafo **matriz);

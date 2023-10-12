@@ -120,7 +120,7 @@ Grafo **verifica_conexoes(Grafo **matriz)
     return matriz;
 }
 
-void printConexoes(Grafo **matriz)
+void print_conexoes(Grafo **matriz)
 {
     char *aux = (char *)malloc(100 * sizeof(char));
     if (aux == NULL)
@@ -143,8 +143,6 @@ void printConexoes(Grafo **matriz)
     free(aux);
 }
 
-#include <stdio.h>
-
 int verifica_conexao_entre_paginas(Grafo **matriz)
 {
     int id_pagina1, id_pagina2;
@@ -160,7 +158,12 @@ int verifica_conexao_entre_paginas(Grafo **matriz)
         print_red("Entrada inválida. Certifique-se de que você digitou um número para o ID da segunda página.\n");
         return -1;
     }
-
+    char *aux = (char *)malloc(100 * sizeof(char));
+    if (aux == NULL)
+    {
+        print_red("Erro de alocação de memória\n");
+        exit(1);
+    }
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
     {
         for (int j = 0; j < TAMANHO_MATRIZ; j++)
@@ -170,17 +173,23 @@ int verifica_conexao_entre_paginas(Grafo **matriz)
             {
                 if (matriz[i][j].conexao == 1)
                 {
-                    printf("Há uma conexão entre as páginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+                    sprintf(aux, "Ha uma conexao entre as paginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+                    print_green(aux);
+                    free(aux);
                     return 1;
                 }
                 else
                 {
-                    printf("Não há conexão entre as páginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+                    sprintf(aux, "Nao ha conexao entre as paginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+                    print_red(aux);
+                    free(aux);
                     return 0;
                 }
             }
         }
     }
-    printf("Não há conexão entre as páginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+    sprintf(aux, "Nao ha conexao entre as paginas com IDs %d e %d.\n", id_pagina1, id_pagina2);
+    print_red(aux);
+    free(aux);
     return 0;
 }
