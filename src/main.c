@@ -22,6 +22,7 @@ int main()
             exibe_quantidade_de_vertices(matrizadj);
             break;
         case OPCAO4:
+            exibe_quantidade_de_arestas(matrizadj);
             break;
         case OPCAO5:
             break;

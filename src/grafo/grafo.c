@@ -90,7 +90,7 @@ Grafo **verifica_conexoes(Grafo **matriz)
     char linha[100];
     fgets(linha, 100, data);
     char *token;
-    int i = 0, j = 0, k = 0;
+    int i = 0, j = 0, k = 0, qnt = 0;
     while (fgets(linha, 100, data) != NULL)
     {
         token = strtok(linha, ",");
@@ -99,22 +99,35 @@ Grafo **verifica_conexoes(Grafo **matriz)
         conexoes[i].id2 = atoi(token);
         i++;
     }
-    for (i = 0; i < TAMANHO_MATRIZ; i++)
+    for (k = 0; k < 2102; k++)
     {
-        for (j = 0; j < TAMANHO_MATRIZ; j++)
+        int conexaoAlterada = 0; // Variável para rastrear se a conexão foi alterada para 1
+
+        for (i = 0; i < TAMANHO_MATRIZ; i++)
         {
-            for (k = 0; k < 2102; k++)
+            for (j = 0; j < TAMANHO_MATRIZ; j++)
             {
                 if (matriz[i][j].aresta1.id == conexoes[k].id1 || matriz[i][j].aresta1.id == conexoes[k].id2)
                 {
                     if (matriz[i][j].aresta2.id == conexoes[k].id1 || matriz[i][j].aresta2.id == conexoes[k].id2)
                     {
-                        matriz[i][j].conexao = 1; // tem conexao
+                        if (matriz[i][j].aresta1.id != matriz[i][j].aresta2.id || conexoes[k].id1 == conexoes[k].id2)
+                        {
+                            matriz[i][j].conexao = 1;
+                            conexaoAlterada = 1; // Marque que a conexão foi alterada para 1
+                            qnt++;
+                        }
                     }
                 }
             }
         }
+        if (!conexaoAlterada)
+        {
+            printf("Conexão não alterada para 1 para k = %d\n", k);
+            printf("ID1: %d, ID2: %d\n", conexoes[k].id1, conexoes[k].id2);
+        }
     }
+
     free(conexoes);
     fclose(data);
     return matriz;
@@ -201,14 +214,12 @@ void buscar_pagina_por_id(Grafo **matriz)
 {
     int id_pagina;
     print_yellow("Informe o ID da pagina que deseja buscar: ");
-
     if (scanf("%d", &id_pagina) != 1)
     {
         limpa_buffer();
         print_red("Entrada invalida. Certifique-se de que voce digitou um numero para o ID da pagina.\n");
         return;
     }
-
     int encontrou = 0;
     char *aux = (char *)malloc(100 * sizeof(char));
     if (aux == NULL)
@@ -216,7 +227,6 @@ void buscar_pagina_por_id(Grafo **matriz)
         print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
-
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
     {
         if (matriz[i][0].aresta1.id == id_pagina)
@@ -226,13 +236,11 @@ void buscar_pagina_por_id(Grafo **matriz)
             encontrou = 1;
         }
     }
-
     if (!encontrou)
     {
         sprintf(aux, "Nenhuma pagina encontrada com o ID %d.\n", id_pagina);
         print_red(aux);
     }
-
     free(aux);
 }
 
@@ -242,20 +250,50 @@ void exibe_quantidade_de_vertices(Grafo **matriz)
 
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
     {
-        if (matriz[i][0].aresta1.id >= 0) 
+        if (matriz[i][0].aresta1.id >= 0)
         {
             quantidade_vertices++;
         }
     }
-
     char *aux = (char *)malloc(100 * sizeof(char));
     if (aux == NULL)
     {
         print_red("Erro de alocação de memória\n");
         exit(1);
     }
-
     sprintf(aux, "A quantidade de vertices (paginas) na matriz e: %d\n", quantidade_vertices);
+    print_green(aux);
+    free(aux);
+}
+
+void exibe_quantidade_de_arestas(Grafo **matriz)
+{
+    int quantidade_arestas = 0;
+
+    for (int i = 0; i < TAMANHO_MATRIZ; i++)
+    {
+        for (int j = 0; j < TAMANHO_MATRIZ; j++)
+        {
+            if (matriz[i][j].conexao == 1)
+            {
+                if (matriz[i][j].conexao == 1 && i == j)
+                {
+                    quantidade_arestas += 2;
+                }
+                else
+                {
+                    quantidade_arestas++;
+                }
+            }
+        }
+    }
+    char *aux = (char *)malloc(100 * sizeof(char));
+    if (aux == NULL)
+    {
+        print_red("Erro de alocação de memória\n");
+        exit(1);
+    }
+    sprintf(aux, "A quantidade de arestas na matriz e: %d\n", quantidade_arestas / 2);
     print_green(aux);
     free(aux);
 }

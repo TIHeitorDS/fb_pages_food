@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 // Lê e descarta caracteres encontrados na entrada
 void limpa_buffer(void);
