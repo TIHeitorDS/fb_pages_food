@@ -379,3 +379,79 @@ void pagina_com_menos_conexoes(Grafo **matriz)
         print_red("Não há páginas com conexões na matriz.\n");
     }
 }
+
+void paginas_isoladas(Grafo **matriz)
+{
+    print_yellow("\n------Páginas Isoladas------\n");
+    int isoladasEncontradas = 0;
+
+    for (int i = 0; i < TAMANHO_MATRIZ; i++)
+    {
+        int conexoesAtuais = 0;
+        for (int j = 0; j < TAMANHO_MATRIZ; j++)
+        {
+            if (matriz[i][j].conexao == 1)
+            {
+                conexoesAtuais++;
+            }
+        }
+        if (conexoesAtuais == 0)
+        {
+            char *aux = (char *)malloc(100 * sizeof(char));
+            if (aux == NULL)
+            {
+                print_red("Erro de alocação de memória\n");
+                exit(1);
+            }
+            sprintf(aux, "Página isolada: %s (ID: %d)\n", matriz[i][0].aresta1.nome, matriz[i][0].aresta1.id);
+            print_green(aux);
+            free(aux);
+            isoladasEncontradas++;
+        }
+    }
+
+    if (isoladasEncontradas == 0)
+    {
+        print_yellow("Nenhuma página isolada encontrada.\n\n");
+    }
+}
+
+void calcular_e_exibir_media_graus(Grafo **matriz)
+{
+    int total_graus = 0;
+    int total_paginas = 0;
+
+    for (int i = 0; i < TAMANHO_MATRIZ; i++)
+    {
+        int graus_pagina = 0;
+        for (int j = 0; j < TAMANHO_MATRIZ; j++)
+        {
+            if (matriz[i][j].conexao == 1)
+            {
+                graus_pagina++;
+            }
+        }
+        if (graus_pagina > 0)
+        {
+            total_graus += graus_pagina;
+            total_paginas++;
+        }
+    }
+
+    if (total_paginas == 0)
+    {
+        print_red("A matriz não contém páginas com conexões.\n");
+        return; // Evita a divisão por zero
+    }
+
+    float media_graus = (float)total_graus / total_paginas;
+    char *aux = (char *)malloc(100 * sizeof(char));
+    if (aux == NULL)
+    {
+        print_red("Erro de alocação de memória\n");
+        exit(1);
+    }
+    sprintf(aux, "A média dos graus na matriz é: %.2f\n", media_graus);
+    print_green(aux);
+    free(aux);
+}

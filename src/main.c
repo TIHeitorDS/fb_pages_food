@@ -25,6 +25,7 @@ int main()
             exibe_quantidade_de_arestas(matrizadj);
             break;
         case OPCAO5:
+            calcular_e_exibir_media_graus(matrizadj);
             break;
         case OPCAO6:
             pagina_com_mais_conexoes(matrizadj);
@@ -33,6 +34,7 @@ int main()
             pagina_com_menos_conexoes(matrizadj);
             break;
         case OPCAO8:
+            paginas_isoladas(matrizadj);
             break;
         case OPCAO0:
             print_green("Obrigado por utilizar meu programa!\n");
@@ -42,6 +44,5 @@ int main()
             break;
         }
     } while (opc != '0');
-
     return 0;
 }
