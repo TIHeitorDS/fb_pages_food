@@ -27,6 +27,7 @@ int main()
         case OPCAO5:
             break;
         case OPCAO6:
+            pagina_com_mais_conexoes(matrizadj);
             break;
         case OPCAO7:
             break;

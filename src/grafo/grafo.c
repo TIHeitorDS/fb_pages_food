@@ -297,3 +297,43 @@ void exibe_quantidade_de_arestas(Grafo **matriz)
     print_green(aux);
     free(aux);
 }
+
+void pagina_com_mais_conexoes(Grafo **matriz)
+{
+    int maxConexoes = 0;
+    int idPaginaComMaisConexoes = -1;
+    char nomePaginaComMaisConexoes[100];
+    for (int i = 0; i < TAMANHO_MATRIZ; i++)
+    {
+        int conexoesAtuais = 0;
+        for (int j = 0; j < TAMANHO_MATRIZ; j++)
+        {
+            if (matriz[i][j].conexao == 1)
+            {
+                conexoesAtuais++;
+            }
+        }
+        if (conexoesAtuais >= maxConexoes)
+        {
+            maxConexoes = conexoesAtuais;
+            idPaginaComMaisConexoes = matriz[i][0].aresta1.id;
+            strcpy(nomePaginaComMaisConexoes, matriz[i][0].aresta1.nome);
+        }
+    }
+    if (idPaginaComMaisConexoes >= 0)
+    {
+        char *aux = (char *)malloc(100 * sizeof(char));
+        if (aux == NULL)
+        {
+            print_red("Erro de alocação de memória\n");
+            exit(1);
+        }
+        sprintf(aux, "A página com mais conexões é %s (ID: %d) com um total de %d conexões.\n", nomePaginaComMaisConexoes, idPaginaComMaisConexoes, maxConexoes);
+        print_green(aux);
+        free(aux);
+    }
+    else
+    {
+        print_red("Não há páginas com conexões na matriz.\n");
+    }
+}
