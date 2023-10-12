@@ -7,3 +7,5 @@ typedef struct conexoes Conexoes;
 Grafo **cria_matriz();
 
 Grafo **preenche_matriz(Grafo **matriz);
+
+void printConexoes(Grafo **matriz);

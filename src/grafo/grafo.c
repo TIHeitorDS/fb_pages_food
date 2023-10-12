@@ -24,7 +24,7 @@ Grafo **cria_matriz()
     Grafo **matriz = (Grafo **)malloc(TAMANHO_MATRIZ * sizeof(Grafo *));
     if (matriz == NULL)
     {
-        printf("ERRO");
+        print_red("Erro de alocação de memória\n");
         exit(1);
     }
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
@@ -32,7 +32,7 @@ Grafo **cria_matriz()
         matriz[i] = (Grafo *)malloc(TAMANHO_MATRIZ * sizeof(Grafo));
         if (matriz[i] == NULL)
         {
-            printf("ERRO");
+            print_red("Erro de alocação de memória\n");
             exit(1);
         }
     }
@@ -44,7 +44,7 @@ Grafo **preenche_matriz(Grafo **matriz)
     FILE *data = fopen("../fb-pages-food/fb-pages-food.nodes", "r");
     if (data == NULL)
     {
-        printf("ERRO");
+        print_red("Erro de alocação de memória\n");
         exit(1);
     }
     char linha[100];
@@ -78,13 +78,13 @@ Grafo **verifica_conexoes(Grafo **matriz)
     Conexoes *conexoes = (Conexoes *)malloc(2102 * sizeof(Conexoes));
     if (conexoes == NULL)
     {
-        printf("ERRO");
+        print_red("Erro de alocação de memória\n");
         exit(1);
     }
     FILE *data = fopen("../fb-pages-food/fb-pages-food.edges", "r");
     if (data == NULL)
     {
-        printf("ERRO");
+        print_red("ERRO");
         exit(1);
     }
     char linha[100];
@@ -122,14 +122,23 @@ Grafo **verifica_conexoes(Grafo **matriz)
 
 void printConexoes(Grafo **matriz)
 {
+    char *aux = (char *)malloc(100 * sizeof(char));
+    if (aux == NULL)
+    {
+        print_red("Erro de alocação de memória\n");
+        exit(1);
+    }
+    print_yellow("\n------Exibindo todas as conexoes da matriz------\n");
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
     {
         for (int j = 0; j < TAMANHO_MATRIZ; j++)
         {
             if (matriz[i][j].conexao == 1)
             {
-                printf("Conexão entre %s (ID: %d) e %s (ID: %d)\n", matriz[i][j].aresta1.nome, matriz[i][j].aresta1.id, matriz[i][j].aresta2.nome, matriz[i][j].aresta2.id);
+                sprintf(aux, "Conexão entre %s (ID: %d) e %s (ID: %d)\n", matriz[i][j].aresta1.nome, matriz[i][j].aresta1.id, matriz[i][j].aresta2.nome, matriz[i][j].aresta2.id);
+                print_green(aux);
             }
         }
     }
+    free(aux);
 }
