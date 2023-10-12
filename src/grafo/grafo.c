@@ -337,3 +337,45 @@ void pagina_com_mais_conexoes(Grafo **matriz)
         print_red("Não há páginas com conexões na matriz.\n");
     }
 }
+
+void pagina_com_menos_conexoes(Grafo **matriz)
+{
+    int minConexoes = 5000; 
+    int idPaginaComMenosConexoes = -1;
+    char nomePaginaComMenosConexoes[100];
+
+    for (int i = 0; i < TAMANHO_MATRIZ; i++)
+    {
+        int conexoesAtuais = 0;
+        for (int j = 0; j < TAMANHO_MATRIZ; j++)
+        {
+            if (matriz[i][j].conexao == 1)
+            {
+                conexoesAtuais++;
+            }
+        }
+        if (conexoesAtuais < minConexoes)
+        {
+            minConexoes = conexoesAtuais;
+            idPaginaComMenosConexoes = matriz[i][0].aresta1.id;
+            strcpy(nomePaginaComMenosConexoes, matriz[i][0].aresta1.nome);
+        }
+    }
+
+    if (idPaginaComMenosConexoes >= 0)
+    {
+        char *aux = (char *)malloc(100 * sizeof(char));
+        if (aux == NULL)
+        {
+            print_red("Erro de alocação de memória\n");
+            exit(1);
+        }
+        sprintf(aux, "A página com menos conexões é %s (ID: %d) com um total de %d conexões.\n", nomePaginaComMenosConexoes, idPaginaComMenosConexoes, minConexoes);
+        print_green(aux);
+        free(aux);
+    }
+    else
+    {
+        print_red("Não há páginas com conexões na matriz.\n");
+    }
+}

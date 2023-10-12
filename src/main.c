@@ -30,6 +30,7 @@ int main()
             pagina_com_mais_conexoes(matrizadj);
             break;
         case OPCAO7:
+            pagina_com_menos_conexoes(matrizadj);
             break;
         case OPCAO8:
             break;
