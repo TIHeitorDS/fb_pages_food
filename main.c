@@ -16,27 +16,31 @@ int main()
 {
     Node *nodes = load_nodes();
     
-    printf("%.0f\n", nodes->id);
-    printf("%s\n", nodes->name);
-    printf("%d\n", nodes->new_id);
+    printf("%.0f\n", nodes[3].id);
+    printf("%s\n", nodes[3].name);
+    printf("%d\n", nodes[3].new_id);
 
-    free(nodes);
     return 0;
 }
 
 Node *load_nodes()
 {
-    Node *node = (Node *)malloc(sizeof(Node));
+    Node *node = (Node *)malloc(nodes_len * sizeof(Node));
+    int index = 0;
     FILE *dataset = fopen("../fb-pages-food/fb-pages-food.nodes", "r");
     if (dataset == NULL)
     {
         printf("erro ao abrir o arquivo!\n");
         exit(1);
     }
+    fseek(dataset, 14, SEEK_SET);
 
-    fscanf(dataset, "%f,%[^,],%d", &node->id, node->name, &node->new_id);
+    while (!feof(dataset))
+    {
+        fscanf(dataset, "%f,%[^,],%d\n", &node[index].id, node[index].name, &node[index].new_id);
+        index++;
+    }
     
-
     fclose(dataset);
 
     return node;
