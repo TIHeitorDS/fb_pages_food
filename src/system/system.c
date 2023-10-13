@@ -57,18 +57,17 @@ void menu(void)
 {
     printf("Menu:\n");
     printf("========================================\n");
-    printf("[1] Verificar conexão entre duas páginas\n");
-    printf("[2] Buscar uma página\n");
-    printf("[3] Exibir quantidade de vértices\n");
+    printf("[1] Verificar conexao entre duas paginas\n");
+    printf("[2] Buscar uma pagina\n");
+    printf("[3] Exibir quantidade de vertices\n");
     printf("[4] Exibir quantidade de arestas\n");
-    printf("[5] Exibir o grau médio do grafo\n");
-    printf("[6] Encontrar a página mais conectada\n");
-    printf("[7] Encontrar a página menos conectada\n");
-    printf("[8] Exibir páginas isoladas\n");
+    printf("[5] Exibir o grau medio do grafo\n");
+    printf("[6] Encontrar a pagina mais conectada\n");
+    printf("[7] Encontrar a pagina menos conectada\n");
+    printf("[8] Exibir paginas isoladas\n");
     printf("[0] Sair\n");
     printf("========================================\n");
 }
-
 
 void print_green(char *text)
 {
