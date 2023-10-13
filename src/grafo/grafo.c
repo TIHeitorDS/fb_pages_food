@@ -340,7 +340,7 @@ void pagina_com_mais_conexoes(Grafo **matriz)
 
 void pagina_com_menos_conexoes(Grafo **matriz)
 {
-    int minConexoes = 5000; 
+    int minConexoes = 5000;
     int idPaginaComMenosConexoes = -1;
     char nomePaginaComMenosConexoes[100];
 
@@ -426,7 +426,11 @@ void calcular_e_exibir_media_graus(Grafo **matriz)
         int graus_pagina = 0;
         for (int j = 0; j < TAMANHO_MATRIZ; j++)
         {
-            if (matriz[i][j].conexao == 1)
+            if (matriz[i][j].conexao == 1 && i == j)
+            {
+                graus_pagina += 2;
+            }
+            else if (matriz[i][j].conexao == 1 && i != j)
             {
                 graus_pagina++;
             }
