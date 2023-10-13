@@ -24,7 +24,7 @@ Grafo **cria_matriz()
     Grafo **matriz = (Grafo **)malloc(TAMANHO_MATRIZ * sizeof(Grafo *));
     if (matriz == NULL)
     {
-        print_red("Erro de alocação de memória\n");
+        print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
@@ -32,7 +32,7 @@ Grafo **cria_matriz()
         matriz[i] = (Grafo *)malloc(TAMANHO_MATRIZ * sizeof(Grafo));
         if (matriz[i] == NULL)
         {
-            print_red("Erro de alocação de memória\n");
+            print_red("Erro de alocacao de memoria\n");
             exit(1);
         }
     }
@@ -44,7 +44,7 @@ Grafo **preenche_matriz(Grafo **matriz)
     FILE *data = fopen("../fb-pages-food/fb-pages-food.nodes", "r");
     if (data == NULL)
     {
-        print_red("Erro de alocação de memória\n");
+        print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
     char linha[100];
@@ -78,7 +78,7 @@ Grafo **verifica_conexoes(Grafo **matriz)
     Conexoes *conexoes = (Conexoes *)malloc(2102 * sizeof(Conexoes));
     if (conexoes == NULL)
     {
-        print_red("Erro de alocação de memória\n");
+        print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
     FILE *data = fopen("../fb-pages-food/fb-pages-food.edges", "r");
@@ -123,7 +123,7 @@ Grafo **verifica_conexoes(Grafo **matriz)
         }
         if (!conexaoAlterada)
         {
-            printf("Conexão não alterada para 1 para k = %d\n", k);
+            printf("Conexão nao alterada para 1 para k = %d\n", k);
             printf("ID1: %d, ID2: %d\n", conexoes[k].id1, conexoes[k].id2);
         }
     }
@@ -138,7 +138,7 @@ void print_conexoes(Grafo **matriz)
     char *aux = (char *)malloc(100 * sizeof(char));
     if (aux == NULL)
     {
-        print_red("Erro de alocação de memória\n");
+        print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
     print_yellow("\n------Exibindo todas as conexoes da matriz------\n");
@@ -148,7 +148,7 @@ void print_conexoes(Grafo **matriz)
         {
             if (matriz[i][j].conexao == 1)
             {
-                sprintf(aux, "Conexão entre %s (ID: %d) e %s (ID: %d)\n", matriz[i][j].aresta1.nome, matriz[i][j].aresta1.id, matriz[i][j].aresta2.nome, matriz[i][j].aresta2.id);
+                sprintf(aux, "Conexao entre %s (ID: %d) e %s (ID: %d)\n", matriz[i][j].aresta1.nome, matriz[i][j].aresta1.id, matriz[i][j].aresta2.nome, matriz[i][j].aresta2.id);
                 print_green(aux);
             }
         }
@@ -159,7 +159,7 @@ void print_conexoes(Grafo **matriz)
 int verifica_conexao_entre_paginas(Grafo **matriz)
 {
     int id_pagina1, id_pagina2;
-    print_yellow("Informe o ID da primeira página: ");
+    print_yellow("Informe o ID da primeira pagina: ");
     if (scanf("%d", &id_pagina1) != 1)
     {
         limpa_buffer();
@@ -177,7 +177,7 @@ int verifica_conexao_entre_paginas(Grafo **matriz)
     char *aux = (char *)malloc(100 * sizeof(char));
     if (aux == NULL)
     {
-        print_red("Erro de alocação de memória\n");
+        print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
@@ -258,7 +258,7 @@ void exibe_quantidade_de_vertices(Grafo **matriz)
     char *aux = (char *)malloc(100 * sizeof(char));
     if (aux == NULL)
     {
-        print_red("Erro de alocação de memória\n");
+        print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
     sprintf(aux, "A quantidade de vertices (paginas) na matriz e: %d\n", quantidade_vertices);
@@ -290,7 +290,7 @@ void exibe_quantidade_de_arestas(Grafo **matriz)
     char *aux = (char *)malloc(100 * sizeof(char));
     if (aux == NULL)
     {
-        print_red("Erro de alocação de memória\n");
+        print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
     sprintf(aux, "A quantidade de arestas na matriz e: %d\n", quantidade_arestas / 2);
@@ -325,16 +325,16 @@ void pagina_com_mais_conexoes(Grafo **matriz)
         char *aux = (char *)malloc(100 * sizeof(char));
         if (aux == NULL)
         {
-            print_red("Erro de alocação de memória\n");
+            print_red("Erro de alocacao de memoria\n");
             exit(1);
         }
-        sprintf(aux, "A página com mais conexões é %s (ID: %d) com um total de %d conexões.\n", nomePaginaComMaisConexoes, idPaginaComMaisConexoes, maxConexoes);
+        sprintf(aux, "A pagina com mais conexoes é %s (ID: %d) com um total de %d conexoes.\n", nomePaginaComMaisConexoes, idPaginaComMaisConexoes, maxConexoes);
         print_green(aux);
         free(aux);
     }
     else
     {
-        print_red("Não há páginas com conexões na matriz.\n");
+        print_red("Nao ha paginas com conexoes na matriz.\n");
     }
 }
 
@@ -367,22 +367,22 @@ void pagina_com_menos_conexoes(Grafo **matriz)
         char *aux = (char *)malloc(100 * sizeof(char));
         if (aux == NULL)
         {
-            print_red("Erro de alocação de memória\n");
+            print_red("Erro de alocacao de memoria\n");
             exit(1);
         }
-        sprintf(aux, "A página com menos conexões é %s (ID: %d) com um total de %d conexões.\n", nomePaginaComMenosConexoes, idPaginaComMenosConexoes, minConexoes);
+        sprintf(aux, "A pagina com menos conexoes é %s (ID: %d) com um total de %d conexoes.\n", nomePaginaComMenosConexoes, idPaginaComMenosConexoes, minConexoes);
         print_green(aux);
         free(aux);
     }
     else
     {
-        print_red("Não há páginas com conexões na matriz.\n");
+        print_red("Nao ha paginas com conexoes na matriz.\n");
     }
 }
 
 void paginas_isoladas(Grafo **matriz)
 {
-    print_yellow("\n------Páginas Isoladas------\n");
+    print_yellow("\n------Paginas Isoladas------\n");
     int isoladasEncontradas = 0;
 
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
@@ -400,10 +400,10 @@ void paginas_isoladas(Grafo **matriz)
             char *aux = (char *)malloc(100 * sizeof(char));
             if (aux == NULL)
             {
-                print_red("Erro de alocação de memória\n");
+                print_red("Erro de alocacao de memoria\n");
                 exit(1);
             }
-            sprintf(aux, "Página isolada: %s (ID: %d)\n", matriz[i][0].aresta1.nome, matriz[i][0].aresta1.id);
+            sprintf(aux, "Pagina isolada: %s (ID: %d)\n", matriz[i][0].aresta1.nome, matriz[i][0].aresta1.id);
             print_green(aux);
             free(aux);
             isoladasEncontradas++;
@@ -412,7 +412,7 @@ void paginas_isoladas(Grafo **matriz)
 
     if (isoladasEncontradas == 0)
     {
-        print_yellow("Nenhuma página isolada encontrada.\n\n");
+        print_yellow("Nenhuma pagina isolada encontrada.\n\n");
     }
 }
 
@@ -440,7 +440,7 @@ void calcular_e_exibir_media_graus(Grafo **matriz)
 
     if (total_paginas == 0)
     {
-        print_red("A matriz não contém páginas com conexões.\n");
+        print_red("A matriz nao contem paginas com conexoes.\n");
         return; // Evita a divisão por zero
     }
 
@@ -448,10 +448,10 @@ void calcular_e_exibir_media_graus(Grafo **matriz)
     char *aux = (char *)malloc(100 * sizeof(char));
     if (aux == NULL)
     {
-        print_red("Erro de alocação de memória\n");
+        print_red("Erro de alocacao de memoria\n");
         exit(1);
     }
-    sprintf(aux, "A média dos graus na matriz é: %.2f\n", media_graus);
+    sprintf(aux, "A media dos graus na matriz e: %.2f\n", media_graus);
     print_green(aux);
     free(aux);
 }
