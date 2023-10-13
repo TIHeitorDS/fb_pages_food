@@ -1,2 +1,34 @@
-output
-readme.html
+# Arquivos temporários
+*~
+
+# Arquivos de compilação em C
+*.o
+*.out
+*.exe
+
+# Arquivos executáveis em C
+a.out
+
+# Arquivos de projeto do VSCode
+.vscode/
+
+# Diretório de saída do Visual Studio Code
+.vscode-server/
+
+# Diretório de configuração do Visual Studio Code
+.code-workspace
+
+# Arquivos de configuração do Visual Studio Code
+.settings.json
+.code-workspace
+
+# Arquivos de configuração do sistema (Linux e Windows)
+.vscode-server/
+node_modules/
+*.suo
+*.user
+*.sln
+*.bak
+*.vspscc
+Thumbs.db
+Desktop.ini
