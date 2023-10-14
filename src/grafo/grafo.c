@@ -14,8 +14,8 @@ struct conexoes
 
 struct grafo
 {
-    Pages aresta1;
-    Pages aresta2;
+    Pages vertice1;
+    Pages vertice2;
     int conexao; // 1 caso estejam ligados e 0 caso não
 };
 
@@ -61,9 +61,9 @@ Grafo **preenche_matriz(Grafo **matriz)
         aux.id = atoi(token);
         for (i = 0; i < TAMANHO_MATRIZ; i++)
         {
-            matriz[linhas][i].aresta1 = aux;
+            matriz[linhas][i].vertice1 = aux;
             matriz[linhas][i].conexao = 0;
-            matriz[i][colunas].aresta2 = aux;
+            matriz[i][colunas].vertice2 = aux;
             matriz[i][colunas].conexao = 0;
         }
         linhas++;
@@ -107,11 +107,11 @@ Grafo **verifica_conexoes(Grafo **matriz)
         {
             for (j = 0; j < TAMANHO_MATRIZ; j++)
             {
-                if (matriz[i][j].aresta1.id == conexoes[k].id1 || matriz[i][j].aresta1.id == conexoes[k].id2)
+                if (matriz[i][j].vertice1.id == conexoes[k].id1 || matriz[i][j].vertice1.id == conexoes[k].id2)
                 {
-                    if (matriz[i][j].aresta2.id == conexoes[k].id1 || matriz[i][j].aresta2.id == conexoes[k].id2)
+                    if (matriz[i][j].vertice2.id == conexoes[k].id1 || matriz[i][j].vertice2.id == conexoes[k].id2)
                     {
-                        if (matriz[i][j].aresta1.id != matriz[i][j].aresta2.id || conexoes[k].id1 == conexoes[k].id2)
+                        if (matriz[i][j].vertice1.id != matriz[i][j].vertice2.id || conexoes[k].id1 == conexoes[k].id2)
                         {
                             matriz[i][j].conexao = 1;
                             conexaoAlterada = 1; // Marque que a conexão foi alterada para 1
@@ -148,7 +148,7 @@ void print_conexoes(Grafo **matriz)
         {
             if (matriz[i][j].conexao == 1)
             {
-                sprintf(aux, "Conexao entre %s (ID: %d) e %s (ID: %d)\n", matriz[i][j].aresta1.nome, matriz[i][j].aresta1.id, matriz[i][j].aresta2.nome, matriz[i][j].aresta2.id);
+                sprintf(aux, "Conexao entre %s (ID: %d) e %s (ID: %d)\n", matriz[i][j].vertice1.nome, matriz[i][j].vertice1.id, matriz[i][j].vertice2.nome, matriz[i][j].vertice2.id);
                 print_green(aux);
             }
         }
@@ -184,8 +184,8 @@ int verifica_conexao_entre_paginas(Grafo **matriz)
     {
         for (int j = 0; j < TAMANHO_MATRIZ; j++)
         {
-            if ((matriz[i][j].aresta1.id == id_pagina1 && matriz[i][j].aresta2.id == id_pagina2) ||
-                (matriz[i][j].aresta1.id == id_pagina2 && matriz[i][j].aresta2.id == id_pagina1))
+            if ((matriz[i][j].vertice1.id == id_pagina1 && matriz[i][j].vertice2.id == id_pagina2) ||
+                (matriz[i][j].vertice1.id == id_pagina2 && matriz[i][j].vertice2.id == id_pagina1))
             {
                 if (matriz[i][j].conexao == 1)
                 {
@@ -229,9 +229,9 @@ void buscar_pagina_por_id(Grafo **matriz)
     }
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
     {
-        if (matriz[i][0].aresta1.id == id_pagina)
+        if (matriz[i][0].vertice1.id == id_pagina)
         {
-            sprintf(aux, "Pagina encontrada com ID %d: %s\n", id_pagina, matriz[i][0].aresta1.nome);
+            sprintf(aux, "Pagina encontrada com ID %d: %s\n", id_pagina, matriz[i][0].vertice1.nome);
             print_green(aux);
             encontrou = 1;
         }
@@ -250,7 +250,7 @@ void exibe_quantidade_de_vertices(Grafo **matriz)
 
     for (int i = 0; i < TAMANHO_MATRIZ; i++)
     {
-        if (matriz[i][0].aresta1.id >= 0)
+        if (matriz[i][0].vertice1.id >= 0)
         {
             quantidade_vertices++;
         }
@@ -316,8 +316,8 @@ void pagina_com_mais_conexoes(Grafo **matriz)
         if (conexoesAtuais >= maxConexoes)
         {
             maxConexoes = conexoesAtuais;
-            idPaginaComMaisConexoes = matriz[i][0].aresta1.id;
-            strcpy(nomePaginaComMaisConexoes, matriz[i][0].aresta1.nome);
+            idPaginaComMaisConexoes = matriz[i][0].vertice1.id;
+            strcpy(nomePaginaComMaisConexoes, matriz[i][0].vertice1.nome);
         }
     }
     if (idPaginaComMaisConexoes >= 0)
@@ -357,8 +357,8 @@ void pagina_com_menos_conexoes(Grafo **matriz)
         if (conexoesAtuais < minConexoes)
         {
             minConexoes = conexoesAtuais;
-            idPaginaComMenosConexoes = matriz[i][0].aresta1.id;
-            strcpy(nomePaginaComMenosConexoes, matriz[i][0].aresta1.nome);
+            idPaginaComMenosConexoes = matriz[i][0].vertice1.id;
+            strcpy(nomePaginaComMenosConexoes, matriz[i][0].vertice1.nome);
         }
     }
 
@@ -403,7 +403,7 @@ void paginas_isoladas(Grafo **matriz)
                 print_red("Erro de alocacao de memoria\n");
                 exit(1);
             }
-            sprintf(aux, "Pagina isolada: %s (ID: %d)\n", matriz[i][0].aresta1.nome, matriz[i][0].aresta1.id);
+            sprintf(aux, "Pagina isolada: %s (ID: %d)\n", matriz[i][0].vertice1.nome, matriz[i][0].vertice1.id);
             print_green(aux);
             free(aux);
             isoladasEncontradas++;
